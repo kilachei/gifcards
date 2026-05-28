@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import Home from './pages/Home'
 import Sell from './pages/Sell'
 import Rates from './pages/Rates'
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/how-it-works" element={<ProtectedRoute><HowItWorks /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </AuthProvider>
   )
