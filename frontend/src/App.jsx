@@ -11,7 +11,7 @@ import HowItWorks from './pages/HowItWorks'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
-import ForgotPassword from './pages/ForgotPassword'
+import ForgotPassword from './pages/Forgotpassword'
 
 const WA_NUMBER = '254727318468'
 const WA_MESSAGE = 'Hey! I need help finding the right gift card.'
