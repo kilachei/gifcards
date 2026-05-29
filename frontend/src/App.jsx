@@ -10,6 +10,7 @@ import HowItWorks from './pages/HowItWorks'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
+import ForgotPassword from './pages/ForgotPassword'
 
 export default function App() {
   return (
@@ -18,16 +19,17 @@ export default function App() {
         <Navbar />
         <Routes>
           {/* Public */}
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/"                element={<Home />} />
+          <Route path="/login"           element={<Login />} />
+          <Route path="/register"        element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
 
           {/* Protected */}
-          <Route path="/sell" element={<ProtectedRoute><Sell /></ProtectedRoute>} />
-          <Route path="/browse" element={<ProtectedRoute><Sell /></ProtectedRoute>} />
-          <Route path="/rates" element={<ProtectedRoute><Rates /></ProtectedRoute>} />
-          <Route path="/how-it-works" element={<ProtectedRoute><HowItWorks /></ProtectedRoute>} />
-          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="/sell"          element={<ProtectedRoute><Sell /></ProtectedRoute>} />
+          <Route path="/browse"        element={<ProtectedRoute><Sell /></ProtectedRoute>} />
+          <Route path="/rates"         element={<ProtectedRoute><Rates /></ProtectedRoute>} />
+          <Route path="/how-it-works"  element={<ProtectedRoute><HowItWorks /></ProtectedRoute>} />
+          <Route path="/profile"       element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         </Routes>
         <Footer />
       </BrowserRouter>
