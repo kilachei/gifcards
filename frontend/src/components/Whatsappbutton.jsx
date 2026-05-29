@@ -1,27 +1,16 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { AuthProvider } from './context/AuthContext'
-import ProtectedRoute from './components/ProtectedRoute'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import Home from './pages/Home'
-import Sell from './pages/Sell'
-import Rates from './pages/Rates'
-import HowItWorks from './pages/HowItWorks'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import Profile from './pages/Profile'
-import ForgotPassword from './pages/ForgotPassword'
 
-const WA_NUMBER = '254727318468'
-const WA_MESSAGE = 'Hey! I need help finding the right gift card.'
+const WHATSAPP_NUMBER = '254727318468'
+const WHATSAPP_MESSAGE = 'Hey! I need help finding the right gift card.'
 
-function WhatsAppFAB() {
+export default function WhatsAppButton() {
   const [open, setOpen] = useState(true)
-  const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MESSAGE)}`
+
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
 
   return (
     <div className="fixed bottom-6 right-6 flex flex-col items-end gap-3 z-50">
+
       {open && (
         <div className="relative bg-white rounded-2xl rounded-br-sm shadow-xl border border-stone-100 p-4 max-w-[220px]">
           <button
@@ -37,6 +26,7 @@ function WhatsAppFAB() {
           <span className="text-xs text-stone-400">Typically replies in minutes</span>
         </div>
       )}
+
       <button
         onClick={() => { setOpen(true); window.location.href = url }}
         className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 active:scale-95"
@@ -48,31 +38,5 @@ function WhatsAppFAB() {
         </svg>
       </button>
     </div>
-  )
-}
-
-export default function App() {
-  return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          {/* Public */}
-          <Route path="/"                element={<Home />} />
-          <Route path="/login"           element={<Login />} />
-          <Route path="/register"        element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-
-          {/* Protected */}
-          <Route path="/sell"          element={<ProtectedRoute><Sell /></ProtectedRoute>} />
-          <Route path="/browse"        element={<ProtectedRoute><Sell /></ProtectedRoute>} />
-          <Route path="/rates"         element={<ProtectedRoute><Rates /></ProtectedRoute>} />
-          <Route path="/how-it-works"  element={<ProtectedRoute><HowItWorks /></ProtectedRoute>} />
-          <Route path="/profile"       element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        </Routes>
-        <Footer />
-        <WhatsAppFAB />
-      </BrowserRouter>
-    </AuthProvider>
   )
 }
