@@ -9,15 +9,17 @@ const BRANDS = [
     textColor: '#fff',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg',
     logoDark: false,
+    cardImg: 'https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?w=400&q=80',
   },
   {
     name: 'Apple',
     tagline: 'Apps & media',
     discount: '20%',
-    bg: '#000000',
+    bg: '#1c1c1e',
     textColor: '#fff',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg',
     logoDark: true,
+    cardImg: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&q=80',
   },
   {
     name: 'Razer Gold',
@@ -27,6 +29,7 @@ const BRANDS = [
     textColor: '#000',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Razer_logo.svg',
     logoDark: false,
+    cardImg: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80',
   },
   {
     name: 'Prepaid Visa',
@@ -36,6 +39,7 @@ const BRANDS = [
     textColor: '#fff',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg',
     logoDark: true,
+    cardImg: 'https://images.unsplash.com/photo-1601597111158-2fceff292cdc?w=400&q=80',
   },
   {
     name: 'Virtual Reward Center',
@@ -45,6 +49,7 @@ const BRANDS = [
     textColor: '#fff',
     logo: null,
     icon: '🎁',
+    cardImg: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&q=80',
   },
   {
     name: 'Tremendous',
@@ -54,6 +59,7 @@ const BRANDS = [
     textColor: '#fff',
     logo: null,
     icon: '💸',
+    cardImg: 'https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=400&q=80',
   },
   {
     name: 'Xbox',
@@ -63,21 +69,22 @@ const BRANDS = [
     textColor: '#fff',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Xbox-Logo.svg',
     logoDark: true,
+    cardImg: 'https://images.unsplash.com/photo-1621259182978-fbf93132d53d?w=400&q=80',
   },
 ]
 
 const STATS = [
-  { label: 'Cards traded',  value: '84,200+' },
-  { label: 'Top brands',    value: '7'       },
-  { label: 'Avg. discount', value: '15%'     },
-  { label: 'Happy users',   value: '32K+'    },
+  { label: 'Cards traded',  value: '200+'  },
+  { label: 'Top brands',    value: '13'    },
+  { label: 'Avg. discount', value: '15%'   },
+  { label: 'Happy users',   value: '150+'  },
 ]
 
 const STEPS = [
   {
     n: '01',
     title: 'Pick a brand',
-    desc: 'Browse our 7 supported gift card brands and choose the one you want to buy or sell.',
+    desc: 'Browse our 13 supported gift card brands and choose the one you want to buy or sell.',
     color: 'bg-amber-50 text-amber-600 border-amber-200',
   },
   {
@@ -102,7 +109,7 @@ export default function Home() {
       <section className="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center">
         <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-8 tracking-wide uppercase">
           <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse inline-block"></span>
-          Live marketplace · 7 brands supported
+          Live marketplace · 13 brands supported
         </div>
         <h1 className="text-5xl md:text-7xl font-black text-stone-900 tracking-tighter leading-[1.05] mb-6">
           Trade gift cards.<br />
@@ -131,8 +138,8 @@ export default function Home() {
       {/* Stats bar */}
       <div className="bg-stone-900 mx-6 md:mx-auto md:max-w-5xl rounded-2xl mb-20">
         <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-stone-700">
-          {STATS.map((s, i) => (
-            <div key={s.label} className={`px-8 py-6 text-center ${i === 0 ? '' : ''}`}>
+          {STATS.map((s) => (
+            <div key={s.label} className="px-8 py-6 text-center">
               <p className="text-3xl font-black text-white mb-1">{s.value}</p>
               <p className="text-xs text-stone-400 uppercase tracking-widest font-medium">{s.label}</p>
             </div>
@@ -154,13 +161,11 @@ export default function Home() {
 
         {/* 4 + 3 layout */}
         <div className="flex flex-col gap-4">
-          {/* Row 1 — 4 cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {BRANDS.slice(0, 4).map(b => (
               <BrandCard key={b.name} brand={b} />
             ))}
           </div>
-          {/* Row 2 — 3 cards centered */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:w-3/4 mx-auto">
             {BRANDS.slice(4).map(b => (
               <BrandCard key={b.name} brand={b} />
@@ -194,7 +199,6 @@ export default function Home() {
       {/* CTA */}
       <section className="max-w-5xl mx-auto px-6 py-20">
         <div className="relative bg-stone-900 rounded-3xl px-10 py-16 text-center overflow-hidden">
-          {/* decorative blobs */}
           <div className="absolute top-0 left-0 w-64 h-64 bg-amber-400/20 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 right-0 w-64 h-64 bg-amber-400/10 rounded-full translate-x-1/2 translate-y-1/2 blur-3xl pointer-events-none" />
           <div className="relative">
@@ -222,13 +226,25 @@ export default function Home() {
 function BrandCard({ brand }) {
   return (
     <div
-      className="group relative rounded-2xl p-6 cursor-pointer overflow-hidden transition-all duration-300 hover:scale-[1.03] hover:shadow-xl"
+      className="group relative rounded-2xl cursor-pointer overflow-hidden transition-all duration-300 hover:scale-[1.03] hover:shadow-xl"
       style={{ backgroundColor: brand.bg }}
     >
-      {/* subtle shine overlay */}
+      {/* Background image */}
+      {brand.cardImg && (
+        <div className="absolute inset-0">
+          <img
+            src={brand.cardImg}
+            alt=""
+            className="w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-300"
+          />
+          <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${brand.bg}cc, ${brand.bg}ff)` }} />
+        </div>
+      )}
+
+      {/* Shine overlay */}
       <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300 rounded-2xl" />
 
-      <div className="relative flex flex-col h-full min-h-[140px] justify-between">
+      <div className="relative flex flex-col h-full min-h-[160px] justify-between p-6">
         {/* Logo or icon */}
         <div className="mb-4">
           {brand.logo ? (
@@ -251,18 +267,12 @@ function BrandCard({ brand }) {
             {brand.tagline}
           </p>
           <div className="flex items-center justify-between">
-            <span
-              className="text-sm font-bold"
-              style={{ color: brand.textColor }}
-            >
+            <span className="text-sm font-bold" style={{ color: brand.textColor }}>
               {brand.name}
             </span>
             <span
               className="text-xs font-bold px-2.5 py-1 rounded-full"
-              style={{
-                backgroundColor: 'rgba(255,255,255,0.2)',
-                color: brand.textColor,
-              }}
+              style={{ backgroundColor: 'rgba(255,255,255,0.2)', color: brand.textColor }}
             >
               -{brand.discount}
             </span>
