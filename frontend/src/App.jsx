@@ -15,7 +15,7 @@ import ForgotPassword from './pages/Forgotpassword'
 import Admin from './pages/Admin'
 
 const WA_NUMBER = '254727318468'
-const WA_MESSAGE = 'Hey! I need help finding the right gift card.'
+const WA_MESSAGE = 'Hi! I want to sell my gift card.'
 
 function WhatsAppFAB() {
   const [open, setOpen] = useState(true)
