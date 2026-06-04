@@ -4,7 +4,6 @@ const BRANDS = [
   {
     name: 'Amazon',
     tagline: 'Shop everything',
-    discount: '18%',
     bg: '#FF9900',
     textColor: '#fff',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg',
@@ -14,7 +13,6 @@ const BRANDS = [
   {
     name: 'Apple',
     tagline: 'Apps & media',
-    discount: '20%',
     bg: '#1c1c1e',
     textColor: '#fff',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg',
@@ -24,7 +22,6 @@ const BRANDS = [
   {
     name: 'Razer Gold',
     tagline: 'Gaming currency',
-    discount: '15%',
     bg: '#44D62C',
     textColor: '#000',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Razer_logo.svg',
@@ -34,7 +31,6 @@ const BRANDS = [
   {
     name: 'Prepaid Visa',
     tagline: 'Spend anywhere',
-    discount: '12%',
     bg: '#1A1F71',
     textColor: '#fff',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg',
@@ -44,7 +40,6 @@ const BRANDS = [
   {
     name: 'Virtual Reward Center',
     tagline: 'Digital rewards',
-    discount: '14%',
     bg: '#6C3CE1',
     textColor: '#fff',
     logo: null,
@@ -54,7 +49,6 @@ const BRANDS = [
   {
     name: 'Tremendous',
     tagline: 'Instant payouts',
-    discount: '13%',
     bg: '#0F172A',
     textColor: '#fff',
     logo: null,
@@ -64,7 +58,6 @@ const BRANDS = [
   {
     name: 'Xbox',
     tagline: 'Games & passes',
-    discount: '16%',
     bg: '#107C10',
     textColor: '#fff',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Xbox-Logo.svg',
@@ -159,17 +152,12 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* 4 + 3 layout */}
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {BRANDS.slice(0, 4).map(b => (
-              <BrandCard key={b.name} brand={b} />
-            ))}
+            {BRANDS.slice(0, 4).map(b => <BrandCard key={b.name} brand={b} />)}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:w-3/4 mx-auto">
-            {BRANDS.slice(4).map(b => (
-              <BrandCard key={b.name} brand={b} />
-            ))}
+            {BRANDS.slice(4).map(b => <BrandCard key={b.name} brand={b} />)}
           </div>
         </div>
       </section>
@@ -237,7 +225,10 @@ function BrandCard({ brand }) {
             alt=""
             className="w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-300"
           />
-          <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${brand.bg}cc, ${brand.bg}ff)` }} />
+          <div
+            className="absolute inset-0"
+            style={{ background: `linear-gradient(135deg, ${brand.bg}cc, ${brand.bg}ff)` }}
+          />
         </div>
       )}
 
@@ -260,23 +251,12 @@ function BrandCard({ brand }) {
         </div>
 
         <div>
-          <p
-            className="text-xs font-medium mb-1 opacity-70"
-            style={{ color: brand.textColor }}
-          >
+          <p className="text-xs font-medium mb-1 opacity-70" style={{ color: brand.textColor }}>
             {brand.tagline}
           </p>
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-bold" style={{ color: brand.textColor }}>
-              {brand.name}
-            </span>
-            <span
-              className="text-xs font-bold px-2.5 py-1 rounded-full"
-              style={{ backgroundColor: 'rgba(255,255,255,0.2)', color: brand.textColor }}
-            >
-              -{brand.discount}
-            </span>
-          </div>
+          <p className="text-sm font-bold" style={{ color: brand.textColor }}>
+            {brand.name}
+          </p>
         </div>
       </div>
     </div>
