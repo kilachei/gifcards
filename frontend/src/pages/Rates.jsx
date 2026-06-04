@@ -1,26 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-
-const RATES = [
-  { brand: 'Amazon',               discount: 18, buyRate: 0.82, sellRate: 0.88, minAmount: 10,  payout: 'Instant'  },
-  { brand: 'Apple',                discount: 20, buyRate: 0.80, sellRate: 0.86, minAmount: 10,  payout: 'Instant'  },
-  { brand: 'Steam',                discount: 15, buyRate: 0.85, sellRate: 0.90, minAmount: 5,   payout: '< 1 hour' },
-  { brand: 'Razer Gold',           discount: 15, buyRate: 0.85, sellRate: 0.89, minAmount: 5,   payout: '< 1 hour' },
-  { brand: 'Google Play',          discount: 17, buyRate: 0.83, sellRate: 0.88, minAmount: 5,   payout: 'Instant'  },
-  { brand: 'Xbox',                 discount: 16, buyRate: 0.84, sellRate: 0.89, minAmount: 10,  payout: '< 1 hour' },
-  { brand: 'PlayStation',          discount: 16, buyRate: 0.84, sellRate: 0.89, minAmount: 10,  payout: '< 1 hour' },
-  { brand: 'Nike',                 discount: 14, buyRate: 0.86, sellRate: 0.90, minAmount: 20,  payout: '< 2 hours'},
-  { brand: 'Sephora',              discount: 14, buyRate: 0.86, sellRate: 0.90, minAmount: 20,  payout: '< 2 hours'},
-  { brand: 'Prepaid Visa',         discount: 12, buyRate: 0.88, sellRate: 0.91, minAmount: 25,  payout: '< 2 hours'},
-  { brand: 'Mastercard',           discount: 12, buyRate: 0.88, sellRate: 0.91, minAmount: 25,  payout: '< 2 hours'},
-  { brand: 'Tremendous',           discount: 13, buyRate: 0.87, sellRate: 0.91, minAmount: 10,  payout: 'Instant'  },
-  { brand: 'Virtual Reward Center',discount: 14, buyRate: 0.86, sellRate: 0.90, minAmount: 10,  payout: 'Instant'  },
-]
+import { collection, onSnapshot } from 'firebase/firestore'
+import { db } from '../firebase'
 
 export default function Rates() {
+  const [rates, setRates] = useState([])
   const [search, setSearch] = useState('')
+  const [loading, setLoading] = useState(true)
 
-  const filtered = RATES.filter(r =>
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, 'rates'), (snap) => {
+      const data = snap.docs.map(d => d.data())
+      data.sort((a, b) => a.brand.localeCompare(b.brand))
+      setRates(data)
+      setLoading(false)
+    })
+    return unsub
+  }, [])
+
+  const filtered = rates.filter(r =>
     r.brand.toLowerCase().includes(search.toLowerCase())
   )
 
@@ -69,85 +67,81 @@ export default function Rates() {
 
         {/* Table */}
         <div className="bg-white border border-stone-200 rounded-3xl overflow-hidden shadow-sm">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-stone-100 bg-stone-50">
-                <th className="text-left px-6 py-4 text-xs font-semibold text-stone-400 uppercase tracking-widest">Brand</th>
-                <th className="text-center px-4 py-4 text-xs font-semibold text-stone-400 uppercase tracking-widest">Discount</th>
-                <th className="text-center px-4 py-4 text-xs font-semibold text-stone-400 uppercase tracking-widest">Buy rate</th>
-                <th className="text-center px-4 py-4 text-xs font-semibold text-stone-400 uppercase tracking-widest">Sell rate</th>
-                <th className="text-center px-4 py-4 text-xs font-semibold text-stone-400 uppercase tracking-widest">Min amount</th>
-                <th className="text-center px-4 py-4 text-xs font-semibold text-stone-400 uppercase tracking-widest">Payout</th>
-                <th className="px-4 py-4"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.length === 0 ? (
-                <tr>
-                  <td colSpan={7} className="text-center py-16 text-stone-400 text-sm">
-                    No brands match "<span className="font-semibold text-stone-600">{search}</span>"
-                  </td>
+          {loading ? (
+            <div className="flex items-center justify-center py-20 text-stone-400 text-sm gap-3">
+              <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+              </svg>
+              Loading rates...
+            </div>
+          ) : (
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-stone-100 bg-stone-50">
+                  <th className="text-left px-6 py-4 text-xs font-semibold text-stone-400 uppercase tracking-widest">Brand</th>
+                  <th className="text-center px-4 py-4 text-xs font-semibold text-stone-400 uppercase tracking-widest">Discount</th>
+                  <th className="text-center px-4 py-4 text-xs font-semibold text-stone-400 uppercase tracking-widest">Buy rate</th>
+                  <th className="text-center px-4 py-4 text-xs font-semibold text-stone-400 uppercase tracking-widest">Sell rate</th>
+                  <th className="text-center px-4 py-4 text-xs font-semibold text-stone-400 uppercase tracking-widest">Min amount</th>
+                  <th className="text-center px-4 py-4 text-xs font-semibold text-stone-400 uppercase tracking-widest">Payout</th>
+                  <th className="px-4 py-4"></th>
                 </tr>
-              ) : (
-                filtered.map((r, i) => (
-                  <tr
-                    key={r.brand}
-                    className={`border-b border-stone-100 hover:bg-amber-50/50 transition-colors last:border-none ${i % 2 === 0 ? '' : 'bg-stone-50/40'}`}
-                  >
-                    {/* Brand */}
-                    <td className="px-6 py-4 font-bold text-stone-900">{r.brand}</td>
-
-                    {/* Discount */}
-                    <td className="px-4 py-4 text-center">
-                      <span className="inline-block bg-amber-100 text-amber-700 text-xs font-bold px-2.5 py-1 rounded-full">
-                        -{r.discount}%
-                      </span>
-                    </td>
-
-                    {/* Buy rate */}
-                    <td className="px-4 py-4 text-center font-semibold text-stone-700">
-                      {r.buyRate.toFixed(2)}
-                    </td>
-
-                    {/* Sell rate */}
-                    <td className="px-4 py-4 text-center font-semibold text-emerald-600">
-                      {r.sellRate.toFixed(2)}
-                    </td>
-
-                    {/* Min amount */}
-                    <td className="px-4 py-4 text-center text-stone-500">
-                      ${r.minAmount}
-                    </td>
-
-                    {/* Payout */}
-                    <td className="px-4 py-4 text-center">
-                      <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${
-                        r.payout === 'Instant'
-                          ? 'bg-emerald-100 text-emerald-700'
-                          : 'bg-blue-50 text-blue-600'
-                      }`}>
-                        <span className={`w-1.5 h-1.5 rounded-full ${r.payout === 'Instant' ? 'bg-emerald-500' : 'bg-blue-400'}`}></span>
-                        {r.payout}
-                      </span>
-                    </td>
-
-                    {/* CTA */}
-                    <td className="px-4 py-4 text-right">
-                      <Link
-                        to="/sell"
-                        className="text-xs font-bold px-3 py-1.5 rounded-lg bg-stone-900 text-white hover:bg-stone-700 transition-all"
-                      >
-                        Sell →
-                      </Link>
+              </thead>
+              <tbody>
+                {filtered.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} className="text-center py-16 text-stone-400 text-sm">
+                      No brands match "<span className="font-semibold text-stone-600">{search}</span>"
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                ) : (
+                  filtered.map((r, i) => (
+                    <tr
+                      key={r.brand}
+                      className={`border-b border-stone-100 hover:bg-amber-50/50 transition-colors last:border-none ${i % 2 === 0 ? '' : 'bg-stone-50/40'}`}
+                    >
+                      <td className="px-6 py-4 font-bold text-stone-900">{r.brand}</td>
+                      <td className="px-4 py-4 text-center">
+                        <span className="inline-block bg-amber-100 text-amber-700 text-xs font-bold px-2.5 py-1 rounded-full">
+                          -{r.discount}%
+                        </span>
+                      </td>
+                      <td className="px-4 py-4 text-center font-semibold text-stone-700">
+                        {Number(r.buyRate).toFixed(2)}
+                      </td>
+                      <td className="px-4 py-4 text-center font-semibold text-emerald-600">
+                        {Number(r.sellRate).toFixed(2)}
+                      </td>
+                      <td className="px-4 py-4 text-center text-stone-500">
+                        ${r.minAmount}
+                      </td>
+                      <td className="px-4 py-4 text-center">
+                        <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${
+                          r.payout === 'Instant'
+                            ? 'bg-emerald-100 text-emerald-700'
+                            : 'bg-blue-50 text-blue-600'
+                        }`}>
+                          <span className={`w-1.5 h-1.5 rounded-full ${r.payout === 'Instant' ? 'bg-emerald-500' : 'bg-blue-400'}`}></span>
+                          {r.payout}
+                        </span>
+                      </td>
+                      <td className="px-4 py-4 text-right">
+                        <Link
+                          to="/sell"
+                          className="text-xs font-bold px-3 py-1.5 rounded-lg bg-stone-900 text-white hover:bg-stone-700 transition-all"
+                        >
+                          Sell →
+                        </Link>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          )}
         </div>
 
-        {/* Footer note */}
         <p className="text-xs text-stone-400 mt-4 text-center">
           Rates are updated in real time. Final payout may vary slightly based on card condition and region.
         </p>

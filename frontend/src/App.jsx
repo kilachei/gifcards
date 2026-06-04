@@ -12,6 +12,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
 import ForgotPassword from './pages/Forgotpassword'
+import Admin from './pages/Admin'
 
 const WA_NUMBER = '254727318468'
 const WA_MESSAGE = 'Hey! I need help finding the right gift card.'
@@ -69,6 +70,9 @@ export default function App() {
           <Route path="/rates"         element={<ProtectedRoute><Rates /></ProtectedRoute>} />
           <Route path="/how-it-works"  element={<ProtectedRoute><HowItWorks /></ProtectedRoute>} />
           <Route path="/profile"       element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+
+          {/* Admin */}
+          <Route path="/admin" element={<Admin />} />
         </Routes>
         <Footer />
         <WhatsAppFAB />
