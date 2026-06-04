@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 const WHATSAPP_NUMBER = '254727318468'
-const WHATSAPP_MESSAGE = 'Hey! I need help finding the right gift card.'
+const WHATSAPP_MESSAGE = 'Hi! I want to sell my gift card.'
 
 export default function WhatsAppButton() {
   const [open, setOpen] = useState(true)
