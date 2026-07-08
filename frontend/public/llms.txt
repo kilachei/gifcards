@@ -1,0 +1,22 @@
+# Kilachei Gift Cards
+
+> Kilachei Gift Cards is an online platform where users can sell gift cards from any brand for cash and browse available gift card listings.
+
+Kilachei Gift Cards connects people who want to convert unused gift cards into cash with buyers looking for discounted gift cards. The platform accepts gift cards of all brands, lists current exchange rates by brand, and supports direct WhatsApp contact for quick transactions.
+
+## Main Pages
+
+- [Home](https://kilacheigiftcards.shop/): Overview of the platform and its services.
+- [Sell Gift Cards](https://kilacheigiftcards.shop/sell): Submit a gift card for sale and get paid in cash.
+- [Browse Gift Cards](https://kilacheigiftcards.shop/browse): View gift cards currently available for purchase.
+- [Rates](https://kilacheigiftcards.shop/rates): Current exchange rates offered per gift card brand.
+- [How It Works](https://kilacheigiftcards.shop/how-it-works): Step-by-step explanation of the sell/buy process.
+
+## Contact
+
+- WhatsApp: https://wa.me/254727318468
+
+## Optional
+
+- [Login](https://kilacheigiftcards.shop/login): Account sign-in (not relevant to general site content).
+- [Register](https://kilacheigiftcards.shop/register): Account creation (not relevant to general site content).

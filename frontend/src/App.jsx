@@ -13,6 +13,7 @@ import Register from './pages/Register'
 import Profile from './pages/Profile'
 import ForgotPassword from './pages/Forgotpassword'
 import Admin from './pages/Admin'
+import Browse from './pages/Browse'
 
 const WA_NUMBER = '254727318468'
 const WA_MESSAGE = 'Hi! I want to sell my gift card.'
@@ -64,12 +65,14 @@ export default function App() {
           <Route path="/register"        element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
 
-          {/* Protected */}
-          <Route path="/sell"          element={<ProtectedRoute><Sell /></ProtectedRoute>} />
-          <Route path="/browse"        element={<ProtectedRoute><Sell /></ProtectedRoute>} />
-          <Route path="/rates"         element={<ProtectedRoute><Rates /></ProtectedRoute>} />
-          <Route path="/how-it-works"  element={<ProtectedRoute><HowItWorks /></ProtectedRoute>} />
-          <Route path="/profile"       element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+{/* Public */}
+<Route path="/sell"          element={<Sell />} />
+<Route path="/browse"        element={<Browse />} />
+<Route path="/rates"         element={<Rates />} />
+<Route path="/how-it-works"  element={<HowItWorks />} />
+
+{/* Protected */}
+<Route path="/profile"       element={<ProtectedRoute><Profile /></ProtectedRoute>} />
 
           {/* Admin */}
           <Route path="/admin" element={<Admin />} />

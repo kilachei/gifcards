@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /sell
+Allow: /browse
+Allow: /rates
+Allow: /how-it-works
+
+Disallow: /profile
+Disallow: /admin
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+
+Sitemap: https://kilacheigiftcards.shop/sitemap.xml
