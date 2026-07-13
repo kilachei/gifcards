@@ -15,7 +15,7 @@ import ForgotPassword from './pages/Forgotpassword'
 import Admin from './pages/Admin'
 import Browse from './pages/Browse'
 
-const WA_NUMBER = '254727318468'
+const WA_NUMBER = '254731832891'
 const WA_MESSAGE = 'Hi! I want to sell my gift card.'
 
 function WhatsAppFAB() {
