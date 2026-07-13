@@ -46,7 +46,7 @@ export default function Footer() {
 
             {/* WhatsApp */}
             <a
-              href="https://wa.me/254727318468"
+              href="https://wa.me/254731832891"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 group"
@@ -67,7 +67,7 @@ export default function Footer() {
                 </p>
 
                 <p className="text-sm font-semibold text-stone-300 group-hover:text-amber-400 transition-colors">
-                  +254 727 318 468
+                  +254 731 832 891
                 </p>
               </div>
             </a>
