@@ -166,7 +166,7 @@ export default function Sell() {
             </div>
 
             <a
-              href={`https://wa.me/254727318468?text=${encodeURIComponent(
+              href={`https://wa.me/254731832891?text=${encodeURIComponent(
                 `Hi! I would like to sell a ${finalCard || 'gift card'} worth $${amount || '0'} (${country}). Please assist.`
               )}`}
               target="_blank"
